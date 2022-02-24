@@ -13,7 +13,6 @@ import {
 
 import { ThemeProvider } from 'styled-components';
 import theme from './src/styles/global/theme';
-import { StatusBar } from 'expo-status-bar';
 
 import { Home } from './src/screens/Home';
 import AppLoading from 'expo-app-loading';
@@ -33,7 +32,6 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style="auto" />
       <Home />
     </ThemeProvider>
   );
