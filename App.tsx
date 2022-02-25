@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import {
   useFonts,
@@ -6,16 +7,17 @@ import {
   Archivo_500Medium,
   Archivo_700Bold
 } from '@expo-google-fonts/archivo';
+
 import {
   Inter_400Regular,
   Inter_500Medium
 } from '@expo-google-fonts/inter';
 
-import { ThemeProvider } from 'styled-components';
+import AppLoading from 'expo-app-loading';
+
 import theme from './src/styles/global/theme';
 
 import { Home } from './src/screens/Home';
-import AppLoading from 'expo-app-loading';
 import { CarDetails } from './src/screens/CarDetails';
 
 export default function App() {

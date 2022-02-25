@@ -1,14 +1,14 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 
 import { useTheme } from 'styled-components';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
+
 import {
   Container
 } from './styles';
-import { TouchableOpacityProps } from 'react-native';
-
 interface BackButtonProps extends TouchableOpacityProps {
   color?: string;
 }
