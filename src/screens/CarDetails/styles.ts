@@ -77,6 +77,17 @@ export const Price = styled.Text`
   color: ${({ theme }) => theme.colors.main};
 `;
 
+export const Accessories = styled.View`
+  width: 100%;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 16px;
+`;
+
 export const About = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular_inter};
   font-size: ${RFValue(15)}px;
@@ -84,6 +95,7 @@ export const About = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 
   text-align: justify;
+  line-height: ${RFValue(25)}px;
 
   margin-top: 23px;
 `;
