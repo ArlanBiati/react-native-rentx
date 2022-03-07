@@ -1,5 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { RFValue } from 'react-native-responsive-fontsize';
+
+import { useTheme } from 'styled-components';
 
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
@@ -26,11 +30,21 @@ import {
   Period,
   Price,
   Accessories,
-  About,
+  RentalPeriod,
+  CalendarIcon,
+  DateInfo,
+  DateTitle,
+  DateValue,
+  RentalPrice,
+  RentalPriceLabel,
+  RentalPriceDetails,
+  RentalPriceQuota,
+  RentalPriceTotal,
   Footer
 } from './styles';
 
-export function CarDetails(){
+export function SchedulingDetails(){
+  const theme = useTheme()
   return (
     <Container>
 
@@ -71,15 +85,43 @@ export function CarDetails(){
           <Accessory name='2 pessoas' icon={peopleSvg} />
         </Accessories>
 
-        <About>
-          Este é um automóvel desportivo. Surgiu do lendário
-          touro de lide indultado na preça Real Mastranza de Sevilla.
-          É um belíssimo carro para quem gosta de acelerar.
-        </About>
+        <RentalPeriod>
+          <CalendarIcon>
+            <Feather
+              name='calendar'
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </CalendarIcon>
+
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValue>07/03/2022</DateValue>
+          </DateInfo>
+
+          <Feather
+            name='chevron-right'
+            size={RFValue(10)}
+            color={theme.colors.text}
+          />
+
+          <DateInfo>
+            <DateTitle>ATE</DateTitle>
+            <DateValue>14/03/2022</DateValue>
+          </DateInfo>
+        </RentalPeriod>
+
+        <RentalPrice>
+          <RentalPriceLabel>Total</RentalPriceLabel>
+          <RentalPriceDetails>
+            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
+          </RentalPriceDetails>
+        </RentalPrice>
       </Content>
 
       <Footer>
-        <Button title='Confirmar' />
+        <Button title='Alugar agora' color={theme.colors.success} />
       </Footer>
 
     </Container>
