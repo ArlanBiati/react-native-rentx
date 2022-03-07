@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import { TouchableOpacityProps } from 'react-native';
 
 import GasolineSvg from '../../assets/gasoline.svg';
 
@@ -26,16 +26,14 @@ interface CarData {
   thumbnail: string;
 }
 
-interface CarProps {
+interface CarProps extends TouchableOpacityProps {
   data: CarData;
 }
 
-export function Car({ data }: CarProps){
-
-  const theme = useTheme();
+export function Car({ data, ...rest }: CarProps){
 
   return (
-    <Container>
+    <Container {...rest}>
       <Details>
         <Brand>{data.brand}</Brand>
         <Name>{data.name}</Name>
