@@ -123,7 +123,7 @@ export function SchedulingDetails(){
         <RentalPrice>
           <RentalPriceLabel>Total</RentalPriceLabel>
           <RentalPriceDetails>
-            <RentalPriceQuota>R$ 580 x3 diárias</RentalPriceQuota>
+            <RentalPriceQuota>R$ 580 x5 diárias</RentalPriceQuota>
             <RentalPriceTotal>R$ 2.900</RentalPriceTotal>
           </RentalPriceDetails>
         </RentalPrice>
