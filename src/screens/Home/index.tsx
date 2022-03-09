@@ -19,14 +19,23 @@ import {
   CarList
 } from './styles';
 
+interface NavigationProps{
+  navigate:(
+    screen: string,
+    carObject:{
+      car: CarDTO
+    }
+  ) => void
+}
+
 export function Home(){
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
 
-  function handleCarDetails() {
-    navigation.navigate('CarDetails' as never)
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate('CarDetails', { car });
   }
 
   useEffect(() => {
@@ -59,7 +68,7 @@ export function Home(){
             height={RFValue(12)}
           />
           <TotalCars>
-            Total de 12 carros
+            Total de {cars.length} carros
           </TotalCars>
         </HeaderContent>
       </Header>
@@ -70,7 +79,7 @@ export function Home(){
         <CarList
           data={cars}
           keyExtractor={item => item.id}
-          renderItem={({ item }) => <Car data={item} onPress={handleCarDetails} />}
+          renderItem={({ item }) => <Car data={item} onPress={() => handleCarDetails(item)} />}
         />
       }
 
