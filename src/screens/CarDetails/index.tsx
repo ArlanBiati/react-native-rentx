@@ -32,10 +32,14 @@ import {
 } from './styles';
 
 export function CarDetails(){
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   function handleConfirmRental() {
-    navigation.navigate('Scheduling' as never)
+    navigation.navigate('Scheduling' as never);
+  }
+
+  function handleBack() {
+    navigation.goBack();
   }
 
   return (
@@ -47,7 +51,7 @@ export function CarDetails(){
       translucent
     />
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>

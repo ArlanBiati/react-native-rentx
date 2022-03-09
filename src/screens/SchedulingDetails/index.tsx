@@ -46,12 +46,15 @@ import {
 } from './styles';
 
 export function SchedulingDetails(){
-  const theme = useTheme()
-
-  const navigation = useNavigation()
+  const theme = useTheme();
+  const navigation = useNavigation();
 
   function handleConfirmRental() {
-    navigation.navigate('SchedulingComplete' as never)
+    navigation.navigate('SchedulingComplete' as never);
+  }
+
+  function handleBack() {
+    navigation.goBack();
   }
 
   return (
@@ -63,7 +66,7 @@ export function SchedulingDetails(){
       translucent
     />
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>

@@ -23,11 +23,14 @@ import {
 
 export function Scheduling(){
   const theme = useTheme();
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   function handleConfirmRental() {
-    navigation.navigate('SchedulingDetails' as never)
+    navigation.navigate('SchedulingDetails' as never);
+  }
+
+  function handleBack() {
+    navigation.goBack();
   }
 
   return (
@@ -41,7 +44,7 @@ export function Scheduling(){
       <Header>
         <BackButton
           color={theme.colors.shape}
-          onPress={() => {}}
+          onPress={handleBack}
         />
         <Title>
           Escolha uma {'\n'}
