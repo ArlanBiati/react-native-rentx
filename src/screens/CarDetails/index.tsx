@@ -28,18 +28,27 @@ import {
   Footer
 } from './styles';
 
+interface NavigationProps{
+  navigate:(
+    screen: string,
+    carObject:{
+      car: CarDTO
+    }
+  ) => void,
+  goBack: () => void
+}
 interface ParamsProps {
   car: CarDTO
 }
 
 export function CarDetails(){
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
   const route = useRoute();
 
   const { car } = route.params as ParamsProps;
 
   function handleConfirmRental() {
-    navigation.navigate('Scheduling' as never);
+    navigation.navigate('Scheduling', { car });
   }
 
   function handleBack() {
