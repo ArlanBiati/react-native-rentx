@@ -141,7 +141,7 @@ export function Scheduling(){
       </Content>
 
       <Footer>
-        <Button title='Confirmar' onPress={handleConfirmRental} />
+        <Button title='Confirmar' onPress={handleConfirmRental} disabled={!rentalPeriod.startFormatted} />
       </Footer>
 
     </Container>
