@@ -1,7 +1,16 @@
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue
+} from 'react-native-reanimated';
+
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { useTheme } from 'styled-components';
 
 import { Accessory } from '../../components/Accessory';
 import { BackButton } from '../../components/BackButton';
@@ -27,8 +36,6 @@ import {
   About,
   Footer
 } from './styles';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { useTheme } from 'styled-components';
 
 interface NavigationProps{
   navigate:(
@@ -114,13 +121,13 @@ export function CarDetails(){
           <BackButton onPress={handleBack} />
         </Header>
 
-        <Animated.View style={[sliderCarsStyleAnimation]}>
-          <CarImages>
-            <ImageSlider
-              imagesUrl={car.photos}
-            />
-          </CarImages>
-        </Animated.View>
+        <CarImages>
+          <Animated.View style={[sliderCarsStyleAnimation]}>
+              <ImageSlider
+                imagesUrl={car.photos}
+              />
+          </Animated.View>
+        </CarImages>
       </Animated.View>
 
       <Animated.ScrollView
