@@ -12,17 +12,23 @@ interface ButtonProps extends TouchableOpacityProps {
   color?: string;
   disabled?: boolean;
   loading?: boolean;
+  light?: boolean;
 }
 
-export function Button({ title, color, disabled = false, loading = false, ...rest }: ButtonProps){
+export function Button({ title, color, light = false, disabled = false, loading = false, ...rest }: ButtonProps){
   const theme = useTheme();
 
   return (
-    <Container {...rest} color={color} disabled={disabled} style={{ opacity: (disabled === true || loading === true) ? 0.5 : 1 }} >
+    <Container
+      {...rest}
+      color={color}
+      disabled={disabled}
+      style={{ opacity: (disabled === true || loading === true) ? 0.5 : 1 }}
+    >
       { loading ?
         <ActivityIndicator color={theme.colors.shape} />
         :
-        <Title>{title}</Title>
+        <Title light={light}>{title}</Title>
       }
     </Container>
   );
