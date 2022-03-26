@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, StatusBar, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 
@@ -17,6 +17,9 @@ import {
 
 export function SignIn(){
   const theme = useTheme();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -46,6 +49,8 @@ export function SignIn(){
               keyboardType='email-address'
               autoCorrect={false}
               autoCapitalize='none'
+              onChangeText={setEmail}
+              value={email}
             />
 
             <PasswordInput
@@ -53,6 +58,8 @@ export function SignIn(){
               placeholder='Senha'
               autoCorrect={false}
               autoCapitalize='none'
+              onChangeText={setPassword}
+              value={password}
             />
           </Form>
 
