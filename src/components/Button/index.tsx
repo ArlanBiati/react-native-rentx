@@ -10,12 +10,18 @@ import {
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
   color?: string;
-  disabled?: boolean;
   loading?: boolean;
   light?: boolean;
 }
 
-export function Button({ title, color, light = false, disabled = false, loading = false, ...rest }: ButtonProps){
+export function Button({
+  title,
+  color,
+  disabled = false,
+  light = false,
+  loading = false,
+  ...rest
+}: ButtonProps){
   const theme = useTheme();
 
   return (
