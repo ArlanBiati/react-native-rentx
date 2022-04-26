@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback } from 'react-native';
 
 import { useTheme } from 'styled-components';
+import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -24,6 +25,7 @@ import {
 
 export function SignIn(){
   const theme = useTheme();
+  const navigation = useNavigation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,6 +52,10 @@ export function SignIn(){
         )
       }
     }
+  }
+
+  function handleNewAccount() {
+    navigation.navigate('SignUpFirstStep' as never)
   }
 
   return (
@@ -106,8 +112,8 @@ export function SignIn(){
               title='Criar conta gratuita'
               color={theme.colors.background_secondary}
               light
-              onPress={() => {}}
-              disabled={true}
+              onPress={handleNewAccount}
+              disabled={false}
               loading={false}
             />
           </Footer>
