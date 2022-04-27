@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
@@ -11,18 +11,40 @@ import {
   Container,
   Header,
   Steps,
-  Title,
-  SubTitle,
   Form,
   FormTitle
 } from './styles';
 
+interface UserParams {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  }
+}
+
 export function SignUpSecondStep(){
   const theme = useTheme();
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const { user } = route.params as UserParams;
 
   function handleBack() {
     navigation.goBack();
+  }
+
+  function handleRegister() {
+    if(!password || !passwordConfirm) {
+      return Alert.alert('Informe a senha e a confirmação')
+    }
+
+    if(password != passwordConfirm) {
+      return Alert.alert('As senhas devem ser iguais')
+    }
   }
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -44,11 +66,15 @@ export function SignUpSecondStep(){
           <PasswordInput
             iconName='lock'
             placeholder='Senha'
+            onChangeText={setPassword}
+            value={password}
           />
 
           <PasswordInput
             iconName='lock'
             placeholder='Repetir senha'
+            onChangeText={setPasswordConfirm}
+            value={passwordConfirm}
           />
 
         </Form>
@@ -56,6 +82,7 @@ export function SignUpSecondStep(){
         <Button
           title='Cadastrar'
           color={theme.colors.success}
+          onPress={handleRegister}
         />
       </Container>
       </TouchableWithoutFeedback>
