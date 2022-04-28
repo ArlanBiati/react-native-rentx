@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import * as Yup from 'yup';
 import {
   Alert,
   Keyboard,
@@ -9,6 +8,7 @@ import {
 
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/native';
+import * as Yup from 'yup';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -40,8 +40,8 @@ export function SignIn(){
           .required('A senha é obrigatória')
       });
 
-      await schema.validate({ email, password })
-      Alert.alert('Tudo certo!')
+      await schema.validate({ email, password });
+      Alert.alert('Tudo certo!');
     } catch (error) {
       if(error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message);
@@ -55,7 +55,7 @@ export function SignIn(){
   }
 
   function handleNewAccount() {
-    navigation.navigate('SignUpFirstStep' as never)
+    navigation.navigate('SignUpFirstStep' as never);
   }
 
   return (

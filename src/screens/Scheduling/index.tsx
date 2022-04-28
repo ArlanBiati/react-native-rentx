@@ -6,7 +6,12 @@ import { format } from 'date-fns';
 
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
-import { Calendar, DayProps, genereteInterval, MarketDateProps } from '../../components/Calendar';
+import {
+  Calendar,
+  DayProps,
+  genereteInterval,
+  MarketDateProps
+} from '../../components/Calendar';
 
 import { CarDTO } from '../../dtos/CarDTO';
 import { getPlatformDate } from '../../utils/getPlatformDate';
@@ -29,11 +34,11 @@ interface NavigationProps{
   navigate:(
     screen: string,
     carObject:{
-      car: CarDTO,
-      dates: string[]
+      car: CarDTO;
+      dates: string[];
     }
   ) => void,
-  goBack: () => void
+  goBack: () => void;
 }
 interface RentalPeriodProps {
   startFormatted: string;
@@ -41,19 +46,19 @@ interface RentalPeriodProps {
 }
 
 interface ParamsProps {
-  car: CarDTO
+  car: CarDTO;
 }
 
 export function Scheduling(){
-  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps);
-  const [marketDates, setMaketDates] = useState<MarketDateProps>({} as MarketDateProps);
-  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriodProps>({} as RentalPeriodProps);
-
   const theme = useTheme();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute();
 
   const { car } = route.params as ParamsProps;
+
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps);
+  const [marketDates, setMaketDates] = useState<MarketDateProps>({} as MarketDateProps);
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriodProps>({} as RentalPeriodProps);
 
   function handleConfirmRental() {
     if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
@@ -90,7 +95,7 @@ export function Scheduling(){
     setRentalPeriod({
       startFormatted: format(getPlatformDate(new Date(firstDate)), 'dd/MM/yyyy'),
       endFormatted: format(getPlatformDate(new Date(endDate)),  'dd/MM/yyyy')
-    })
+    });
   }
 
   return (

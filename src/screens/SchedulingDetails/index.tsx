@@ -43,13 +43,17 @@ import {
   RentalPriceTotal,
   Footer
 } from './styles';
-import { Load } from '../../components/Load';
 
 interface NavigationProps{
   navigate:(
     screen: string,
+    confirmationObject:{
+      nextScreenRoute: string;
+      title: string;
+      message: string;
+    }
   ) => void,
-  goBack: () => void
+  goBack: () => void;
 }
 interface ParamsProps {
   car: CarDTO;
@@ -62,9 +66,6 @@ interface RentalPeriod {
 }
 
 export function SchedulingDetails(){
-  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
-  const [loading, setLoading] = useState(false);
-
   const theme = useTheme();
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute();
@@ -72,8 +73,12 @@ export function SchedulingDetails(){
   const { car, dates } = route.params as ParamsProps;
   const rentTotal = Number(dates.length * car.rent.price);
 
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
+  const [loading, setLoading] = useState(false);
+
+
   async function handleConfirmRental() {
-    setLoading(true)
+    setLoading(true);
 
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
@@ -87,15 +92,25 @@ export function SchedulingDetails(){
       car,
       startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
       endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy')
-    })
+    });
 
     await api.put(`/schedules_bycars/${car.id}`, {
       id: car.id,
       unavailable_dates
     })
-    .then(() => navigation.navigate('SchedulingComplete'))
+    .then(() =>
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'Home',
+        title: 'Carro alugado!!',
+        message: `
+        Agora você só precisa ir{'\n'}
+        até a concessionária da RENTX{'\n'}
+        pegar o seu automóvel.
+        `
+      })
+    )
     .catch(() => Alert.alert('Não foi possivel confirmar o agendamento.'))
-    .finally(() => setLoading(false))
+    .finally(() => setLoading(false));
   }
 
   function handleBack() {
@@ -106,8 +121,8 @@ export function SchedulingDetails(){
     setRentalPeriod({
       start: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
       end: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy')
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <Container>

@@ -34,7 +34,7 @@ interface NavigationProps{
       }
     }
   ) => void,
-  goBack: () => void
+  goBack: () => void;
 }
 
 export function SignUpFirstStep(){
@@ -56,7 +56,7 @@ export function SignUpFirstStep(){
 
         name: Yup.string()
         .required('Nome é obrigatório')
-      })
+      });
 
       const data = { name, email, driverLicense };
       await schema .validate(data);
@@ -72,6 +72,7 @@ export function SignUpFirstStep(){
   function handleBack() {
     navigation.goBack();
   }
+
   return (
     <KeyboardAvoidingView behavior='position' enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

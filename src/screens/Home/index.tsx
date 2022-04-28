@@ -40,12 +40,15 @@ interface NavigationProps{
   navigate:(
     screen: string,
     carObject?:{
-      car: CarDTO
+      car: CarDTO;
     }
-  ) => void
+  ) => void;
 }
 
 export function Home(){
+  const theme = useTheme();
+  const navigation = useNavigation<NavigationProps>();
+
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -76,9 +79,6 @@ export function Home(){
     }
   });
 
-  const theme = useTheme();
-  const navigation = useNavigation<NavigationProps>();
-
   function handleCarDetails(car: CarDTO) {
     navigation.navigate('CarDetails', { car });
   }
@@ -100,14 +100,14 @@ export function Home(){
       }
     }
 
-    fetchCars()
+    fetchCars();
   }, []);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', () => {
       return true
-    })
-  },[])
+    });
+  },[]);
 
   return (
     <Container>
