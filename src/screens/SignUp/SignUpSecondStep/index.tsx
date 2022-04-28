@@ -1,7 +1,13 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback
+} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { Button } from '../../../components/Button';
@@ -23,9 +29,21 @@ interface UserParams {
   }
 }
 
+interface NavigationProps{
+  navigate:(
+    screen: string,
+    confirmationObject:{
+      nextScreenRoute: string;
+      title: string;
+      message: string;
+    }
+  ) => void,
+  goBack: () => void;
+}
+
 export function SignUpSecondStep(){
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
   const route = useRoute();
 
   const [password, setPassword] = useState('');
@@ -39,13 +57,20 @@ export function SignUpSecondStep(){
 
   function handleRegister() {
     if(!password || !passwordConfirm) {
-      return Alert.alert('Informe a senha e a confirmação')
+      return Alert.alert('Informe a senha e a confirmação');
     }
 
     if(password != passwordConfirm) {
-      return Alert.alert('As senhas devem ser iguais')
+      return Alert.alert('As senhas devem ser iguais');
     }
+
+    navigation.navigate('Confirmation', {
+      nextScreenRoute: 'SignIn',
+      title: 'Conta Criada!',
+      message: `Agora é só fazer login${'\n'}e aproveitar.`
+    });
   }
+
   return (
     <KeyboardAvoidingView behavior='position' enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

@@ -41,13 +41,13 @@ interface NavigationProps{
   navigate:(
     screen: string,
     carObject:{
-      car: CarDTO
+      car: CarDTO;
     }
   ) => void,
-  goBack: () => void
+  goBack: () => void;
 }
 interface ParamsProps {
-  car: CarDTO
+  car: CarDTO;
 }
 
 export function CarDetails(){
@@ -71,7 +71,7 @@ export function CarDetails(){
         Extrapolate.CLAMP
       )
     }
-  })
+  });
 
   const sliderCarsStyleAnimation = useAnimatedStyle(() => {
     return {
@@ -92,7 +92,7 @@ export function CarDetails(){
         }
       ]
     }
-  })
+  });
 
   function handleConfirmRental() {
     navigation.navigate('Scheduling', { car });
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     zIndex: 1,
   }
-})
+});

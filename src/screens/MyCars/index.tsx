@@ -31,11 +31,11 @@ interface NavigationProps{
   navigate:(
     screen: string,
     carObject:{
-      car: CarDTO,
-      dates: string[]
+      car: CarDTO;
+      dates: string[];
     }
   ) => void,
-  goBack: () => void
+  goBack: () => void;
 }
 
 interface CarProps {
@@ -47,11 +47,11 @@ interface CarProps {
 }
 
 export function MyCars(){
-  const [cars, setCars] = useState<CarProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const theme = useTheme();
   const navigation = useNavigation<NavigationProps>();
+
+  const [cars, setCars] = useState<CarProps[]>([]);
+  const [loading, setLoading] = useState(true);
 
   function handleBack() {
     navigation.goBack();
