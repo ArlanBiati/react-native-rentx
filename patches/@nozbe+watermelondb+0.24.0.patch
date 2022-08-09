@@ -1,0 +1,33 @@
+diff --git a/node_modules/@nozbe/watermelondb/WatermelonDB.podspec b/node_modules/@nozbe/watermelondb/WatermelonDB.podspec
+index 1f3af50..e9fea58 100644
+--- a/node_modules/@nozbe/watermelondb/WatermelonDB.podspec
++++ b/node_modules/@nozbe/watermelondb/WatermelonDB.podspec
+@@ -13,7 +13,10 @@ Pod::Spec.new do |s|
+   s.platforms    = { :ios => "9.0", :tvos => "9.0" }
+   s.source = { :git => "https://github.com/Nozbe/WatermelonDB.git", :tag => "v#{s.version}" }
+   s.source_files = "native/ios/**/*.{h,m,mm,swift,c,cpp}", "native/shared/**/*.{h,c,cpp}"
+-  s.public_header_files = 'native/ios/WatermelonDB/SupportingFiles/Bridging.h'
++  s.public_header_files = [
++    'native/ios/WatermelonDB/SupportingFiles/Bridging.h',
++    'native/ios/WatermelonDB/JSIInstaller.h',
++  ]
+   s.requires_arc = true
+   # simdjson is annoyingly slow without compiler optimization, disable for debugging
+   s.compiler_flags = '-Os'
+diff --git a/node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/Bridging.h b/node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/Bridging.h
+index 135118d..8324550 100644
+--- a/node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/Bridging.h
++++ b/node_modules/@nozbe/watermelondb/native/ios/WatermelonDB/SupportingFiles/Bridging.h
+@@ -6,12 +6,6 @@
+ 
+ #import <React/RCTBridgeModule.h>
+ 
+-#if __has_include("JSIInstaller.h")
+-#import "JSIInstaller.h"
+-#else
+-#import "../JSIInstaller.h"
+-#endif
+-
+ #if __has_include("DatabaseDeleteHelper.h")
+ #import "DatabaseDeleteHelper.h"
+ #else
