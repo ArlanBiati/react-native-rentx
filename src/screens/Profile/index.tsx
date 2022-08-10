@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useTheme } from 'styled-components';
+import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { BackButton } from '../../components/BackButton';
-
+import { useTheme } from 'styled-components';
 import { Feather } from '@expo/vector-icons';
+
+import { useAuth } from '../../hooks/auth';
+
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
+import { BackButton } from '../../components/BackButton';
+import { PasswordInput } from '../../components/PasswordInput';
 
 import * as ImagePicker from 'expo-image-picker';
 
@@ -25,11 +31,6 @@ import {
   OptionTitle,
   Section
 } from './styles';
-import { Input } from '../../components/Input';
-import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
-import { PasswordInput } from '../../components/PasswordInput';
-import { useAuth } from '../../hooks/auth';
-import { Button } from '../../components/Button';
 
 export function Profile(){
   const theme = useTheme();
