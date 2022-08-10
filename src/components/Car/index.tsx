@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 import { Car as ModelCar } from '../../database/model/Car';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
@@ -22,6 +24,7 @@ interface CarProps extends TouchableOpacityProps {
 }
 
 export function Car({ data, ...rest }: CarProps){
+  const netInfo = useNetInfo();
 
   const MotorIcon = getAccessoryIcon(data.fuel_type)
 
@@ -34,7 +37,7 @@ export function Car({ data, ...rest }: CarProps){
         <About>
           <Rent>
             <Period>{data.period}</Period>
-            <Price>{`R$ ${data.price}`}</Price>
+            <Price>{ netInfo.isConnected === true ? `R$ ${data.price}` : '...' }</Price>
           </Rent>
 
           <Type>

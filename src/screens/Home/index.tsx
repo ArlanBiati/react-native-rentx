@@ -14,6 +14,7 @@ import { Car } from '../../components/Car';
 import { LoadAnimation } from '../../components/LoadAnimation';
 
 import { Car as ModelCar } from '../../database/model/Car';
+import { CarDTO } from '../../dtos/CarDTO';
 
 import {
   Container,
@@ -26,7 +27,7 @@ interface NavigationProps{
   navigate:(
     screen: string,
     carObject?:{
-      car: ModelCar;
+      car: CarDTO;
     }
   ) => void;
 }
@@ -38,7 +39,7 @@ export function Home(){
   const [cars, setCars] = useState<ModelCar[]>([]);
   const [loading, setLoading] = useState(true);
 
-  function handleCarDetails(car: ModelCar) {
+  function handleCarDetails(car: CarDTO) {
     navigation.navigate('CarDetails', { car });
   }
 
