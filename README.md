@@ -114,7 +114,9 @@ git clone https://github.com/ArlanBiati/react-native-rentx && cd react-native-re
 
 ---
 
-## Features
+</br>
+
+## 📱 Features
 
 - Autenticação de usuário
 - Criação de usuário
