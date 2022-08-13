@@ -97,19 +97,25 @@ function AuthProvider({ children } : AuthProviderProps) {
   }
 
   useEffect(() => {
-    async function loadUserData() {
-      const userCollection = database.get<ModelUser>('users');
-      const response = await userCollection.query().fetch();
+    try {
+      async function loadUserData() {
+        const userCollection = database.get<ModelUser>('users');
+        const response = await userCollection.query().fetch();
 
-      if(response.length > 0) {
-        const userData = response[0]._raw as unknown as User;
-        api.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
-        setData(userData);
-        setLoading(false);
+        if(response.length > 0) {
+          const userData = response[0]._raw as unknown as User;
+          api.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`;
+          setData(userData);
+          setLoading(false);
+        }
       }
-    }
 
-    loadUserData();
+      loadUserData();
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false);
+    }
   }, [])
 
   return (
