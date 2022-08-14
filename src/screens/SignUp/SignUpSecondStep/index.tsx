@@ -75,7 +75,7 @@ export function SignUpSecondStep(){
       navigation.navigate('Confirmation', {
         nextScreenRoute: 'SignIn',
         title: 'Conta Criada!',
-        message: `Agora é só fazer login${'\n'}e aproveitar.`
+        message: `Agora é só fazer login\ne aproveitar.`
       });
     })
     .catch(() => {
